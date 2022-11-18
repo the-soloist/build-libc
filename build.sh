@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 # set -x
 
-GLIBC_VERSION_ARRAY=(
+LIBC_VERSION_ARRAY=(
     "2.19" "2.23" "2.24" "2.25" "2.26" "2.27" "2.28" "2.29" "2.30" "2.31" "2.32" "2.33" "2.34" "2.35" "2.36"
 )
-GLIBC_ARCH_ARRAY=(
+LIBC_ARCH_ARRAY=(
     "x64" "x64"
     "arm-linux-gnueabi" "arm-linux-gnueabihf" "aarch64-linux-gnu"
     "mips-linux-gnu" "mips64-linux-gnuabi64" "mipsel-linux-gnu" "mips64el-linux-gnuabi64"
 )
 
-GLIBC_HOME="/opt/glibc"
+LIBC_HOME="/opt/glibc"
 
 NOW_TIME=$(date "+%Y-%m-%d_%H:%M:%S")
 CUSTOM_NAME="\"ignore this unless you set custom config (-c)\""
@@ -23,7 +23,7 @@ LOG_MAKE_INSTALL="$BUILD_LOG/make-install_$NOW_TIME.log"
 function print_help() {
     cat <<EOF
 Usage:
-    bash $0 [-a arch] [-v glibc_version] [-m more_debug_info] [-d download_glibc] [-c set_custom_config] [-n set_custom_name]
+    bash $0 [-a arch] [-v libc_version] [-m more_debug_info] [-d download_libc] [-c set_custom_config] [-n set_custom_name]
 
     option -a: 
         x64 x86
@@ -31,7 +31,7 @@ Usage:
         mips-linux-gnu      mips64-linux-gnuabi64   mipsel-linux-gnu    mips64el-linux-gnuabi64
 
     option -v: 
-        all ${GLIBC_VERSION_ARRAY[*]}
+        all ${LIBC_VERSION_ARRAY[*]}
 
     option -c:
         --disable-experimental-malloc: disable tcache
@@ -48,11 +48,11 @@ EOF
 function print_end_info() {
     # $1 version
     echo "==> compress glibc:"
-    echo "cd $GLIBC_HOME/$GLIBC_ARCH"
+    echo "cd $LIBC_HOME/$LIBC_ARCH"
     if [ -z "$CUSTOM_CONFIG" ]; then
-        echo "tar -Jcvf ../$GLIBC_ARCH-$GLIBC_VERSION.tar.xz $GLIBC_VERSION"
+        echo "tar -Jcvf ../glibc-$LIBC_ARCH-$LIBC_VERSION.tar.xz $LIBC_VERSION"
     else
-        echo "tar -Jcvf ../$GLIBC_ARCH-$GLIBC_VERSION-$CUSTOM_NAME.tar.xz $GLIBC_VERSION-$CUSTOM_NAME"
+        echo "tar -Jcvf ../glibc-$LIBC_ARCH-$LIBC_VERSION-$CUSTOM_NAME.tar.xz $LIBC_VERSION-$CUSTOM_NAME"
     fi
 
 }
@@ -61,7 +61,7 @@ function pause() {
     read -n 1 -p "Press any key to continue..." INP
 }
 
-function init_glibc_home() {
+function init_libc_home() {
     echo ">>> init glibc home"
 
     mkdir -p $BUILD_LOG
@@ -70,8 +70,8 @@ function init_glibc_home() {
     echo >"$LOG_MAKE"
     echo >"$LOG_MAKE_INSTALL"
 
-    mkdir -p $GLIBC_HOME
-    mkdir -p $GLIBC_HOME/source
+    mkdir -p $LIBC_HOME
+    mkdir -p $LIBC_HOME/source
 
     echo -e ">>> done\n"
 }
@@ -107,52 +107,52 @@ function install_complie_dependence() {
     if [ $Arch == "x64" ] || [ $Arch == "x86" ]; then
         sudo apt install -y gcc-multilib g++-multilib
     else
-        # cat mutilarch-dependencies.txt
-        while read line; do
-            $line
-        done <"scripts/mutilarch-dependencies.txt"
+        # while read line; do
+        #     $line
+        # done <"scripts/mutilarch-dependencies.txt"
+        bash ./scripts/install_mutilarch_dependencies.sh
     fi
 
     echo -e ">>> done\n"
 }
 
-function download_glibc_source() {
+function download_libc_source() {
     # $1: version
     Version=$1
     echo ">>> download glibc source"
 
-    cd $GLIBC_HOME/source
-    if [ ! -d "$GLIBC_HOME/source/glibc-$Version" ]; then
+    cd $LIBC_HOME/source
+    if [ ! -d "$LIBC_HOME/source/glibc-$Version" ]; then
         wget "http://mirrors.ustc.edu.cn/gnu/libc/glibc-$Version.tar.gz"
         tar -xf glibc-$Version.tar.gz
     else
-        echo "[*] $GLIBC_HOME/source/glibc-$Version already exists"
+        echo "[*] $LIBC_HOME/source/glibc-$Version already exists"
     fi
 
     echo -e ">>> done\n"
 }
 
-function clean_glibc_trash() {
+function clean_libc_trash() {
     # $1: version
     Version=$1
     echo ">>> clean glibc trash"
 
-    cd $GLIBC_HOME/source
+    cd $LIBC_HOME/source
     rm "glibc-$Version.tar.gz"
     rm -rf "glibc-$Version/build"
 
     echo -e ">>> done\n"
 }
 
-function install_glibc() {
+function install_libc() {
     # $1: arch
     # $2: version
     Arch=$1
     Version=$2
     if [ -z "$CUSTOM_CONFIG" ]; then
-        Prefix="$GLIBC_HOME/$Arch/$Version"
+        Prefix="$LIBC_HOME/$Arch/$Version"
     else
-        Prefix="$GLIBC_HOME/$Arch/$Version-$CUSTOM_NAME"
+        Prefix="$LIBC_HOME/$Arch/$Version-$CUSTOM_NAME"
     fi
     echo ">>> install glibc"
 
@@ -163,8 +163,8 @@ function install_glibc() {
 
     echo -e "[init] build dir"
     mkdir -p "$Prefix"
-    mkdir -p "$GLIBC_HOME/source/glibc-$Version/build"
-    cd "$GLIBC_HOME/source/glibc-$Version/build"
+    mkdir -p "$LIBC_HOME/source/glibc-$Version/build"
+    cd "$LIBC_HOME/source/glibc-$Version/build"
 
     echo -e "[run] configure"
     if [ $Arch == "x64" ]; then
@@ -209,8 +209,8 @@ function install_glibc() {
 
 while getopts "a:v:c:n:d:mh" OPT; do
     case $OPT in
-    a) GLIBC_ARCH="$OPTARG" ;;
-    v) GLIBC_VERSION="$OPTARG" ;;
+    a) LIBC_ARCH="$OPTARG" ;;
+    v) LIBC_VERSION="$OPTARG" ;;
     c) CUSTOM_CONFIG="$OPTARG" ;;
     n) CUSTOM_NAME="$OPTARG" ;;
     m) # compile with more debug info
@@ -218,9 +218,9 @@ while getopts "a:v:c:n:d:mh" OPT; do
         CXXFLAGS="-g -g3 -ggdb -gdwarf-4 -Og -w"
         ;;
     d) # just download glibc source code
-        init_glibc_home
-        download_glibc_source "$OPTARG"
-        clean_glibc_trash "$OPTARG"
+        init_libc_home
+        download_libc_source "$OPTARG"
+        clean_libc_trash "$OPTARG"
         exit 0
         ;;
     h) print_help ;;
@@ -229,24 +229,24 @@ while getopts "a:v:c:n:d:mh" OPT; do
 done
 
 ### check args
-if [ -z "$GLIBC_ARCH" ] && [[ "${GLIBC_ARCH_ARRAY[@]}" =~ "$GLIBC_ARCH" ]]; then
-    echo -e "please set GLIBC_ARCH\n"
+if [ -z "$LIBC_ARCH" ] && [[ "${LIBC_ARCH_ARRAY[@]}" =~ "$LIBC_ARCH" ]]; then
+    echo -e "please set LIBC_ARCH\n"
     print_help
 fi
-if [ -z "$GLIBC_VERSION" ] && [[ "${GLIBC_VERSION_ARRAY[@]}" =~ "$GLIBC_VERSION" ]]; then
-    echo -e "please set GLIBC_VERSION\n"
+if [ -z "$LIBC_VERSION" ] && [[ "${LIBC_VERSION_ARRAY[@]}" =~ "$LIBC_VERSION" ]]; then
+    echo -e "please set LIBC_VERSION\n"
     print_help
 fi
 
 ### init build env
-init_glibc_home
-init_complie_args $GLIBC_ARCH
-install_complie_dependence $GLIBC_ARCH
+init_libc_home
+init_complie_args $LIBC_ARCH
+install_complie_dependence $LIBC_ARCH
 
 echo "================================ info ================================"
 echo "NOW_TIME:      $NOW_TIME"
-echo "GLIBC_ARCH:    $GLIBC_ARCH"
-echo "GLIBC_VERSION: $GLIBC_VERSION"
+echo "LIBC_ARCH:     $LIBC_ARCH"
+echo "LIBC_VERSION:  $LIBC_VERSION"
 echo "CUSTOM_CONFIG: $CUSTOM_CONFIG"
 echo "CUSTOM_NAME:   $CUSTOM_NAME"
 echo "CC:            $CC"
@@ -257,18 +257,18 @@ echo "======================================================================"
 
 pause
 
-if [ -n "$GLIBC_VERSION" ] && [ "$GLIBC_VERSION" != "all" ]; then
-    echo -e "\n### compile $GLIBC_VERSION ###\n"
-    download_glibc_source $GLIBC_VERSION
-    clean_glibc_trash $GLIBC_VERSION
-    install_glibc $GLIBC_ARCH $GLIBC_VERSION
-    print_end_info $GLIBC_VERSION
+if [ -n "$LIBC_VERSION" ] && [ "$LIBC_VERSION" != "all" ]; then
+    echo -e "\n### compile $LIBC_VERSION ###\n"
+    download_libc_source $LIBC_VERSION
+    clean_libc_trash $LIBC_VERSION
+    install_libc $LIBC_ARCH $LIBC_VERSION
+    print_end_info $LIBC_VERSION
 else
-    for GLIBC_VERSION in ${GLIBC_VERSION_ARRAY[@]}; do
-        echo -e "\n### compile $GLIBC_VERSION ###\n"
-        download_glibc_source $GLIBC_VERSION
-        clean_glibc_trash $GLIBC_VERSION
-        install_glibc $GLIBC_ARCH $GLIBC_VERSION
-        print_end_info $GLIBC_VERSION
+    for LIBC_VERSION in ${LIBC_VERSION_ARRAY[@]}; do
+        echo -e "\n### compile $LIBC_VERSION ###\n"
+        download_libc_source $LIBC_VERSION
+        clean_libc_trash $LIBC_VERSION
+        install_libc $LIBC_ARCH $LIBC_VERSION
+        print_end_info $LIBC_VERSION
     done
 fi
