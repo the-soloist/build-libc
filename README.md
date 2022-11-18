@@ -1,6 +1,6 @@
 # build glibc
 
-一键编译/交叉编译常见架构的 glibc
+一键编译/交叉编译常见架构的 libc
 
 ## Usage
 
@@ -38,9 +38,9 @@ Usage:
 -n: custom save name
 ```
 
-使用前请将 `build.sh` 中的 LIBC_HOME 修改为自定义路径，默认为 `/opt/glibc`。
+使用前请将 `build.sh` 中的 LIBC_HOME 修改为自定义路径，默认为 `/opt/<libc>`。
 
-脚本运行中下载的 glibc 源码与 install 路径均在 LIBC_HOME 下。
+脚本运行中下载的 libc 源码与 install 路径均在 LIBC_HOME 下。
 
 ## 参考资料
 
