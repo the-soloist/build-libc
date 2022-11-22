@@ -5,7 +5,7 @@ LIBC_VERSION_ARRAY=(
     "2.19" "2.23" "2.24" "2.25" "2.26" "2.27" "2.28" "2.29" "2.30" "2.31" "2.32" "2.33" "2.34" "2.35" "2.36"
 )
 LIBC_ARCH_ARRAY=(
-    "x64" "x64"
+    "x64" "x86"
     "arm-linux-gnueabi" "arm-linux-gnueabihf" "aarch64-linux-gnu"
     "mips-linux-gnu" "mips64-linux-gnuabi64" "mipsel-linux-gnu" "mips64el-linux-gnuabi64"
 )

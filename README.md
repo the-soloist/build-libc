@@ -1,4 +1,4 @@
-# build glibc
+# build libc
 
 一键编译/交叉编译常见架构的 libc
 
