@@ -110,7 +110,8 @@ function clean_libc_trash() {
 
 function print_start_info() {
     echo "==================================== build info ===================================="
-    echo "LIBC_FULL_NAME:   $LIBC_FULL_NAME,  LIBC_SHORT_NAME: $LIBC_SHORT_NAME"
+    echo "LIBC_FULL_NAME:   $LIBC_FULL_NAME"
+    echo "LIBC_SHORT_NAME:  $LIBC_SHORT_NAME"
     echo "LIBC_HOME:        $LIBC_HOME"
     echo "NOW_TIME:         $NOW_TIME"
     echo "BUILD_LOG:        $BUILD_LOG"

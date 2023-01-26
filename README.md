@@ -50,3 +50,9 @@ Usage:
 使用前请将 `build-<libc>.sh` 中的 LIBC_HOME 修改为自定义路径，默认为 `/opt/<libc>`。
 
 脚本运行中下载的 libc 源码与 install 路径均存放 LIBC_HOME 下。
+
+可以在 bashrc 中添加一个 alias，方便使用
+
+```sh
+alias build-libc="bash /path/to/build-libc/build.sh"
+```

@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 # set -x
 
-source "./utils.sh"
+WORK_HOME="$(dirname $(readlink -f "$0"))"
+
+source "$WORK_HOME/utils.sh"
 
 # parse args
 while getopts "l:a:v:c:n:t:d:mh" OPT; do
     case $OPT in
     l) # load libc compile functions
-        if [ ! -f "./build-$OPTARG.sh" ]; then
-            echo "./build-$OPTARG.sh is not exist"
+        if [ ! -f "$WORK_HOME/build-$OPTARG.sh" ]; then
+            echo "$WORK_HOME/build-$OPTARG.sh is not exist"
             exit 1
         else
-            source "./build-$OPTARG.sh"
+            source "$WORK_HOME/build-$OPTARG.sh"
         fi ;;
     a) LIBC_ARCH="$OPTARG" ;;
     v) LIBC_VERSION="$OPTARG" ;;
