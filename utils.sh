@@ -108,6 +108,16 @@ function clean_libc_trash() {
     echo -e ">>> done\n"
 }
 
+function download_libc_source() {
+    echo "nothing to do, please define 'download_libc_source'"
+    exit 1
+}
+
+function install_libc() {
+    echo "nothing to do, please define 'install_libc'"
+    exit 1
+}
+
 function print_start_info() {
     echo "==================================== build info ===================================="
     echo "LIBC_FULL_NAME:   $LIBC_FULL_NAME"
