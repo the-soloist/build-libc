@@ -23,12 +23,13 @@ Usage:
         --disable-experimental-malloc: disable tcache
 
     examples:
-        bash $0 -l "glibc" -a x86_64 -v all
-        bash $0 -l "glibc" -a x86_64 -v 2.3x -t 16
         bash $0 -l "glibc" -a x86_64 -v 2.3x -c "--disable-experimental-malloc" -n "no_tcache"
+        bash $0 -l "glibc" -a x86_64 -v 2.3x -t 16
+        bash $0 -l "glibc" -a x86_64 -v all
         bash $0 -l "glibc" -d 2.3x
-        bash $0 -l "musl-libc" -d 1.2.x
+        bash $0 -l "glibc" -h
         bash $0 -l "musl-libc" -a x86_64 -v 1.2.x
+        bash $0 -l "musl-libc" -d 1.2.x
 EOF
     exit 1
 }
