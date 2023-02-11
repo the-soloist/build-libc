@@ -11,10 +11,7 @@ Usage:
         musl-libc
 
     option -a: 
-        x86 x86_64
-        arm-linux-gnueabi   arm-linux-gnueabihf   aarch64-linux-gnu
-        mips-linux-gnu      mipsel-linux-gnu      mips64-linux-gnuabi64   mips64el-linux-gnuabi64
-        riscv64-linux-gnu
+        ${LIBC_ARCH_ARRAY[*]}
 
     option -v: 
         all ${LIBC_VERSION_ARRAY[*]}
@@ -30,6 +27,7 @@ Usage:
         bash $0 -l "glibc" -h
         bash $0 -l "musl-libc" -a x86_64 -v 1.2.x
         bash $0 -l "musl-libc" -d 1.2.x
+        bash $0 -l "musl-libc" -h
 EOF
     exit 1
 }
