@@ -12,7 +12,7 @@ LIBC_VERSION_ARRAY=(
 
 LIBC_ARCH_ARRAY=(
     "x86" "x86_64"
-    "arm-linux-gnueabi" "arm-linux-gnueabihf" "aarch64-linux-gnu"
+    "arm-linux-gnueabi" "arm-linux-gnueabihf" "arm-none-eabi" "aarch64-linux-gnu"
     "mips-linux-gnu" "mipsel-linux-gnu" "mips64-linux-gnuabi64" "mips64el-linux-gnuabi64"
     "riscv64-linux-gnu"
 )
