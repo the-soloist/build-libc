@@ -151,6 +151,22 @@ function print_end_info() {
     fi
 }
 
+function print_error_log() {
+    # $1: print lines
+    num=$1
+
+    echo -e "[log] configure"
+    tail -n $num "$LOG_CONFIGURE"
+
+    echo -e "\n[log] make"
+    tail -n $num "$LOG_MAKE"
+
+    echo -e "\n[log] make install"
+    tail -n $num "$LOG_MAKE_INSTALL"
+
+    exit 1
+}
+
 function pause() {
     read -n 1 -p "Press any key to continue..." INP
 }

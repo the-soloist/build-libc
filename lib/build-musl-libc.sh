@@ -94,12 +94,6 @@ function install_libc() {
         echo -e ">>> install $_prefix done\n"
     else
         echo -e ">>> install $_prefix failed!\n"
-
-        echo -e "[log] make"
-        tail -n 30 "$LOG_MAKE"
-        echo -e "[log] make install"
-        tail -n 30 "$LOG_MAKE_INSTALL"
-
-        exit 1
+        print_error_log 30
     fi
 }
