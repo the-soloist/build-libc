@@ -22,17 +22,6 @@ LIBC_ARCH_ARRAY=(
     "riscv64-linux-gnu"
 )
 
-NOW_TIME=$(date "+%Y-%m-%d_%H:%M:%S")
-
-LIBC_HOME="/opt/$LIBC_FULL_NAME"
-BUILD_LOG="/tmp/log/build-$LIBC_FULL_NAME"
-LOG_CONFIGURE="$BUILD_LOG/configure_$NOW_TIME.log"
-LOG_MAKE="$BUILD_LOG/make_$NOW_TIME.log"
-LOG_MAKE_INSTALL="$BUILD_LOG/make-install_$NOW_TIME.log"
-
-COMPILE_THREAD="8"
-CUSTOM_NAME="\"ignore this unless you set custom config (-c)\""
-
 function download_libc_source() {
     # $1: libc version
     _version=$1
