@@ -82,11 +82,11 @@ function install_complie_dependence() {
 function init_libc_home() {
     echo ">>> init $LIBC_FULL_NAME home"
 
-    mkdir -p "$BUILD_LOG"
+    if [ -z $LIBC_HOME ]; then
+        LIBC_HOME="/$DATA_HOME/$LIBC_FULL_NAME"
+    fi
 
-    # echo >"$LOG_CONFIGURE"
-    # echo >"$LOG_MAKE"
-    # echo >"$LOG_MAKE_INSTALL"
+    mkdir -p "$BUILD_LOG"
 
     mkdir -p "$LIBC_HOME"
     mkdir -p "$LIBC_HOME/source"
