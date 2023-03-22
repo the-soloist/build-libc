@@ -25,7 +25,7 @@ while getopts "l:a:v:c:n:t:d:mh" OPT; do
         CFLAGS="-g -g3 -ggdb -gdwarf-4 -Og -w"
         CXXFLAGS="-g -g3 -ggdb -gdwarf-4 -Og -w"
         ;;
-    d) # just download libc source code
+    d) # download libc source code
         init_libc_home
         download_libc_source "$OPTARG"
         clean_libc_trash "$OPTARG"
