@@ -1,6 +1,6 @@
 # build libc
 
-一键编译常见架构的 libc，默认运行环境为 64 bits x86_64。
+一键编译常见架构的 libc，默认运行环境为 x86_64。
 
 目前已支持 glibc、musl-libc。
 
@@ -44,5 +44,5 @@ bash ./build.sh -l "glibc" -h
 可以在 bashrc 中添加一个 alias，方便使用
 
 ```sh
-alias build-libc="bash /path/to/build-libc/build.sh"
+alias build-libc="bash /path/to/build.sh"
 ```
