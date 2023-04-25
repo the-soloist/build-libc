@@ -39,13 +39,12 @@ done
 ### init vars
 NOW_TIME=$(date "+%Y-%m-%d_%H:%M:%S")
 
-LIBC_HOME="/$DATA_HOME/$LIBC_FULL_NAME"
+LIBC_HOME="$DATA_HOME/$LIBC_FULL_NAME"
 BUILD_LOG="/tmp/log/build-$LIBC_FULL_NAME"
 LOG_CONFIGURE="$BUILD_LOG/configure_$NOW_TIME.log"
 LOG_MAKE="$BUILD_LOG/make_$NOW_TIME.log"
 LOG_MAKE_INSTALL="$BUILD_LOG/make-install_$NOW_TIME.log"
 
-COMPILE_THREAD="8"
 CUSTOM_NAME="\"ignore this unless you set custom config (-c)\""
 
 ### check args
