@@ -25,7 +25,7 @@ function download_libc_source() {
 
     cd $LIBC_HOME/source
     if [ ! -d "$LIBC_HOME/source/glibc-$_version" ]; then
-        wget "http://mirrors.ustc.edu.cn/gnu/libc/glibc-$_version.tar.gz"
+        wget "http://mirrors.ustc.edu.cn/gnu/libc/glibc-$_version.tar.gz" -O "glibc-$_version.tar.gz"
         tar -xf glibc-$_version.tar.gz
     else
         echo "[*] $LIBC_HOME/source/glibc-$_version already exists"

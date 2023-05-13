@@ -30,7 +30,7 @@ function download_libc_source() {
 
     cd $LIBC_HOME/source
     if [ ! -d "$LIBC_HOME/source/musl-$_version" ]; then
-        wget "https://musl.libc.org/releases/musl-$_version.tar.gz"
+        wget "https://musl.libc.org/releases/musl-$_version.tar.gz" -O "musl-$_version.tar.gz"
         tar -xf musl-$_version.tar.gz
     else
         echo "[*] $LIBC_HOME/source/musl-$_version already exists"
