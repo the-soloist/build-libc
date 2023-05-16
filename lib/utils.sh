@@ -84,7 +84,7 @@ function init_libc_home() {
 
     if [ -z $LIBC_HOME ]; then
         # init env while downloading source code
-        LIBC_HOME="/$DATA_HOME/$LIBC_FULL_NAME"
+        LIBC_HOME="$DATA_HOME/$LIBC_FULL_NAME"
         BUILD_LOG="/tmp/log/build-$LIBC_FULL_NAME"
     fi
 
