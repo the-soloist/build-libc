@@ -124,7 +124,7 @@ function print_start_info() {
     echo "LIBC_FULL_NAME:   $LIBC_FULL_NAME"
     echo "LIBC_SHORT_NAME:  $LIBC_SHORT_NAME"
     echo "LIBC_HOME:        $LIBC_HOME"
-    echo "NOW_TIME:         $NOW_TIME"
+    echo "CURRENT_TIME:     $CURRENT_TIME"
     echo "BUILD_LOG:        $BUILD_LOG"
     echo "LOG_CONFIGURE:    $LOG_CONFIGURE"
     echo "LOG_MAKE:         $LOG_MAKE"

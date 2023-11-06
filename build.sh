@@ -37,13 +37,13 @@ while getopts "l:a:v:c:n:t:d:mh" OPT; do
 done
 
 ### init vars
-NOW_TIME=$(date "+%Y-%m-%d_%H:%M:%S")
+CURRENT_TIME=$(date "+%Y-%m-%d_%H:%M:%S")
 
 LIBC_HOME="$DATA_HOME/$LIBC_FULL_NAME"
 BUILD_LOG="/tmp/log/build-$LIBC_FULL_NAME"
-LOG_CONFIGURE="$BUILD_LOG/configure_$NOW_TIME.log"
-LOG_MAKE="$BUILD_LOG/make_$NOW_TIME.log"
-LOG_MAKE_INSTALL="$BUILD_LOG/make-install_$NOW_TIME.log"
+LOG_CONFIGURE="$BUILD_LOG/configure_$CURRENT_TIME.log"
+LOG_MAKE="$BUILD_LOG/make_$CURRENT_TIME.log"
+LOG_MAKE_INSTALL="$BUILD_LOG/make-install_$CURRENT_TIME.log"
 
 CUSTOM_NAME="\"ignore this unless you set custom config (-c)\""
 
@@ -53,7 +53,7 @@ if [ -z "$LIBC_ARCH" ] && [[ "${LIBC_ARCH_ARRAY[@]}" =~ "$LIBC_ARCH" ]]; then
     print_help
 fi
 if [ -z "$LIBC_VERSION" ] && [[ "${LIBC_VERSION_ARRAY[@]}" =~ "$LIBC_VERSION" ]]; then
-    echo -e "please set LIBC_VERSION\n"
+    echo -e "please set correct LIBC_VERSION\n"
     print_help
 fi
 
