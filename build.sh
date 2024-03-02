@@ -40,7 +40,7 @@ done
 CURRENT_TIME=$(date "+%Y-%m-%d_%H:%M:%S")
 
 LIBC_HOME="$DATA_HOME/$LIBC_FULL_NAME"
-BUILD_LOG="/tmp/log/build-$LIBC_FULL_NAME"
+BUILD_LOG="/tmp/logs/build-$LIBC_FULL_NAME"
 LOG_CONFIGURE="$BUILD_LOG/configure_$CURRENT_TIME.log"
 LOG_MAKE="$BUILD_LOG/make_$CURRENT_TIME.log"
 LOG_MAKE_INSTALL="$BUILD_LOG/make-install_$CURRENT_TIME.log"
