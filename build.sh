@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # set -x
 
-DATA_HOME="/opt"
+DATA_HOME="/opt/deps"
 WORK_HOME="$(dirname $(readlink -f "$0"))"
 
 source "$WORK_HOME/lib/utils.sh"
